@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -126,44 +125,48 @@
  ?> 
  <form action="cal.php" method="POST">
 			<div class="table-responsive">
-  			<table class="table" style="padding:15px; border: 1px solid black;">
-  			<thead>
+  		 <table style="width:50%" border="1">
+  <caption>The PAYE Calculator</caption>  			
+
+ <thead>
   			<tr>
-				<td></td>
-				<td><h3>ANNUAL</h3></td>
-				<td><h3>MONTHLY</h3></td>
+				<th></th>
+				<th>Annual</th>
+				<th>Monthly</th>
 			</tr>
 			</thead>
 			<tbody>
 				<tr>
 			
-			 	<td>
-			 	 <label for="gross">GROSS SALARY:</label>
+			 	<td>Gross Salary
 				</td>
 			<td>
-				<input type="varchar" class="form-control" size="4" name="Gross" value="<?php echo "$gross";?>">
+				<input type="varchar" class="form-control" style="border:none;  width: 98%"  name="Gross" placeholder= "Enter your annual gross salary" value="<?php echo "$gross";?>">
 			</td>
-			<td> <input type="varchar"  class="form-control" size="4" value="<?php echo "$monthlygross";?>">
+			<td> <input type="varchar" class="form-control" style="border:none;  width: 98%" value="<?php echo "$monthlygross";?>" disabled>
 			</td>
 			</tr>
 			<tr>
-				<td><label for="gross">TAX PAYABLE:</label></td>
-				<td><input type="varchar"  class="form-control" size="4" value=""></td>
-				<td><input type="varchar" class="form-control" size="4"  value=""></td>
+				<td>Tax Payable</td>
+				<td><input type="varchar"  class="form-control"style="border:none;  width: 98%"  value="" disabled></td>
+				<td><input type="varchar" class="form-control" style="border:none;  width: 98%"  value="" disabled></td>
 			</tr>
 			<tr>
-				<td><label for="gross">PENSION CONTRIBUTION:</label></td>
-				<td><input type="varchar" class="form-control" size="4"  value="<?php echo "$pension";?>"></td>
-				<td><input type="varchar" class="form-control" size="4"  value="<?php echo "$monthlypension";?>"></td>
+				<td>Pension Contribution</td>
+				<td><input type="varchar" class="form-control" style="border:none;  width: 98%"  value="<?php echo "$pension";?>" disabled>
+				</td>
+
+				<td><input type="varchar" class="form-control" style="border:none;  width: 98%" value="<?php echo "$monthlypension";?>"disabled>
+				</td>
 			</tr>
 			<tr>
-				<td><label for="gross">NET TAKEHOME PAY:</label></td>
-				<td><input type="varchar" class="form-control" size="4" value=""></td>
-				<td><input type="varchar" class="form-control" size="4" value=""></td>
+				<td>Net Takehome Pay</td>
+				<td><input type="varchar" class="form-control" style="border:none;  width: 98%" value="" disabled></td>
+				<td><input type="varchar" class="form-control" style="border:none;  width: 98%" value="" disabled></td>
 			</tr>
 			<tr>
-			<td>
-			 <button type="submit"  name="submit" class="btn btn-default" style="background-color: #f44336; color: white; padding: 14px 25px; text-align: center; text-decoration: none; display: inline-block;">Submit</button>
+			<td style="border:none" align="center" valign="middle" colspan="3">
+			 <button type="submit"  name="submit" class="btn btn-default"  align = "center" style="background-color: #f44336; color: white;  padding: 14px 25px; text-align: center; text-decoration: none; display: inline-block;">Analyze  Payroll</button>
 			 </td>
 			 </tr>
 			 </tbody>
@@ -178,5 +181,3 @@
 
 </body>
 </html>
-
- 
