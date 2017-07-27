@@ -22,105 +22,91 @@
 		 $taxable_income = $gross - $non_taxable;
 		 $monthlytaxable=$taxable_income/12;
 		 $monthlypension=$pension/12;
-		 $amount = $taxable_income;
-		 $tax1=300000;
-		 $tax2=600000;
-		 $tax3=1100000;
-		 $tax4=1600000;
-		 $tax5=3200000;
-		 $firsttax=300000*0.07;
-		 $secondtax=300000*0.11;
-		 $thirdtax=500000*0.15;
-		 $fourthtax=500000*0.19;
-		 $fifthtax= 1600000*0.21;
+		
 
+		 function computeTaxPayable($taxable_income)	{
+		 	$taxpayable = 0;
+		 	if($taxable_income < 300000)
+		 		$taxpayable = computeFirstTax($taxable_income);
+		 	elseif($taxable_income < 600000)	
+		 		$taxpayable = computeFirstTax($taxable_income) + computeSecondTax($taxable_income);
+		 	elseif ($taxable_income < 1100000) 
+		 		$taxpayable = computeFirstTax($taxable_income) + computeSecondTax($taxable_income) + computeThirdTax($taxable_income);
+		 	elseif ($taxable_income < 1600000) 
+		 		$taxpayable = computeFirstTax($taxable_income) + computeSecondTax($taxable_income) + computeThirdTax($taxable_income) + computeFourthTax($taxable_income);
+		 	elseif ($taxable_income < 3200000) 
+		 		$taxpayable = computeFirstTax($taxable_income) + computeSecondTax($taxable_income) + computeThirdTax($taxable_income) + computeFourthTax($taxable_income) + computeFifthTax($taxable_income);
+		 	else
+		 		$taxpayable = computeFirstTax($taxable_income) + computeSecondTax($taxable_income) + computeThirdTax($taxable_income) + computeFourthTax($taxable_income) + computeFifthTax($taxable_income) + computeSixthTax($taxable_income);
 
+		 	return $taxpayable;
+		 }
 
-		 function tax_1st($amount,$tax1,$percent_1)  { 
-				if ($amount < $tax1) {
-					$tax_1 = $amount * $percent_1;
-					echo $tax_1 ;
-					} else {
-						$tax_2 = $tax1*$percent_1;
-					} 
-			}
-			function tax_2nd($amount,$tax2,$percent_2,$tax1,$firsttax) { 
-				if ($amount < $tax2) {
-					  	$firstadd = ($amount-$tax1)*$percent_2;
-					  	$tax_3 = $firstadd + $firsttax;
-					  	echo $tax_3;
-					  } else {
-						$tax_4 = ($tax2-$tax1)*$percent_2;
-						echo $tax_4;
-					} 
-								}
-			function tax_3rd($amount,$tax3,$tax2,$percent_3,$firsttax,$secondtax) { 
-				 if ($amount < $tax3) {
-						$secondadd = ($amount-$tax2)*$percent_3;
-					  	$tax_5= $firsttax + $secondtax +$secondadd;
-					  	echo $tax_5;
-					  } else {
-						$tax_6 = ($tax3-$tax2)*$percent_3;
-						echo $tax_8;
-					} 
-								}
-			function tax_4th( $amount,$tax4, $tax3,$percent_4,$firsttax,$secondtax,$thirdtax) { 
-				if($amount < $tax4) {
-					  	$thirdadd = ($amount-$tax3)*$percent_4;
-					  	$tax_7=$firsttax + $secondtax + $thirdtax +$thirdadd;
-					  	echo $tax_7;
-					  } else {
-						$tax_8 = ($tax4-$tax3)*$percent_4;
-						echo $tax_8;
-					} 
-								}
-			function tax_5th($amount,$tax5,$tax4,$percent_5,$firsttax,$secondtax,$thirdtax,$fourthtax) { 
-				if ($amount < $tax5) {
-					  	$fourthadd= ($amount-$tax4)*$percent_5;
-					  	$tax_9=$firsttax + $secondtax + $thirdtax +$fourthtax+$fourthadd;
-					  	echo $tax_9;
-					  } else {
-						$tax_10 = ($tax5-$tax4)*$percent_5;
-						echo $tax_10;
-					} 
-								}
-			function tax_6th($amount, $tax5,$percent_6,$firsttax,$secondtax,$thirdtax,$fourthtax,$fifthtax) { 
-				if ($amount > $tax5) {
-					$fifthadd= ($amount-$tax5)*$percent_6;
-					$tax_9=$firsttax + $secondtax + $thirdtax +$fourthtax+$fifthtax+$fifthadd;
-						echo $tax_9;
-					} 
-								}
+		 function computeFirstTax($taxable_income)	{
+		 	if($taxable_income < 300000)	{
+		 		$firsttax = $taxable_income * 0.07;
+		 	}	else {
+		 		$firsttax = 0.07 * 300000;
+		 	}
+		 	return $firsttax;
+		 }
 
-					function tax($amount,$tax1,$tax2,$tax3,$tax4,$tax5,$firsttax,$secondtax,$thirdtax,$fourthtax,$fifthtax){
-					if ($amount <  $tax1) {
-					tax_1st($amount,$tax1,0.07);
-						
-					} elseif ($amount < $tax2) {
-					tax_2nd($amount,$tax2,0.11,$tax1,$firsttax);
-						
-						
-					} elseif ($amount < $tax3) {
-					tax_3rd($amount,$tax3,$tax2,0.15,$firsttax,$secondtax);
-						
-					} elseif ($amount < $tax4) {
-					tax_4th($amount,$tax4,$tax3,0.19,$firsttax,$secondtax,$thirdtax);
-					} elseif ($amount < $tax5) {
-					tax_5th($amount,$tax5,$tax4,0.21,$firsttax,$secondtax,$thirdtax,$fourthtax);
-					} else {
-					tax_6th($amount,3200000,0.32,$firsttax,$secondtax,$thirdtax,$fourthtax,$fifthtax);
-						
-					}
-				}
+		  function computeSecondTax($taxable_income)	{
+		  	if($taxable_income < 600000)	{
+		 		$secondtax = ($taxable_income - 300000)* 0.11;
+		 	}	else {
+		 		$secondtax = 0.11 * 300000;
+		 	}
+		 	return $secondtax;
+		 	
+		 }
+
+		 function computeThirdTax($taxable_income)	{
+		 	if($taxable_income < 1100000)	{
+		 		$thirdtax = ($taxable_income - 600000)* 0.15;
+		 	}	else {
+		 		$thirdtax = 0.15 * 500000;
+		 	}
+		 	return $thirdtax;
+		 }
+
+		 function computeFourthTax($taxable_income)	{
+
+		 	if($taxable_income < 1600000)	{
+		 		$fourthtax = ($taxable_income - 1100000)* 0.19;
+		 	}	else {
+		 		$fourthtax = 0.19 * 500000;
+		 	}
+		 	return $fourthtax;
+
+		 }
+
+		 function computeFifthTax($taxable_income)	{
+		 	if($taxable_income < 3200000)	{
+		 		$fifthtax = ($taxable_income - 1600000)* 0.21;
+		 	}	else {
+		 		$fifthtax = 0.21 * 1600000;
+		 	}
+		 	return $fifthtax;
+
+		 }
+
+		 function computeSixthTax($taxable_income)	{
+		 	return ($taxable_income - 3200000) * 0.24;
+		 }
 				
-				
+	
 
-		 echo "<h2>Results</h2>";
+		$taxpayable = computeTaxPayable($taxable_income);
+		$monthlytax = $taxpayable/12;
+		$nettakehome = $gross -  $pension - $taxpayable;
+		$monthlytakehome = $nettakehome / 12;
+		echo "<h2>Results</h2>";
 		echo "<h5>The Relief Allowance is  $reliefallowance <br></h5>"; 
 		echo "<h5>The Pension  is $pension<br></h5> ";
 		echo "<h5>The Total Non Taxable Income  is $non_taxable<br></p> ";
 		echo "<h5>The Taxable Income is $taxable_income <br></h5>";
-		echo "<h5>The tax of $gross is </h5>" ;
+		echo "<h5>The tax Payable on a gross of $gross is $taxpayable</h5>" ;
  }
  ?> 
  <form action="cal.php" method="POST">
@@ -148,8 +134,9 @@
 			</tr>
 			<tr>
 				<td>Tax Payable</td>
-				<td><input type="varchar"  class="form-control"style="border:none;  width: 98%"  value="" disabled></td>
-				<td><input type="varchar" class="form-control" style="border:none;  width: 98%"  value="" disabled></td>
+				<td>
+				<input type="varchar"  class="form-control" style="border:none;  width: 98%" value="<?php echo "$taxpayable";?>" disabled></td>
+				<td><input type="varchar" class="form-control" style="border:none;  width: 98%"  value="<?php echo "$monthlytax";?>" disabled></td>
 			</tr>
 			<tr>
 				<td>Pension Contribution</td>
@@ -161,8 +148,8 @@
 			</tr>
 			<tr>
 				<td>Net Takehome Pay</td>
-				<td><input type="varchar" class="form-control" style="border:none;  width: 98%" value="" disabled></td>
-				<td><input type="varchar" class="form-control" style="border:none;  width: 98%" value="" disabled></td>
+				<td><input type="varchar" class="form-control" style="border:none;  width: 98%" value="<?php echo "$nettakehome";?>" disabled></td>
+				<td><input type="varchar" class="form-control" style="border:none;  width: 98%" value="<?php echo "$monthlytakehome";?>" disabled></td>
 			</tr>
 			<tr>
 			<td style="border:none" align="center" valign="middle" colspan="3">
