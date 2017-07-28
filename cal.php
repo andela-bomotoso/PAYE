@@ -1,16 +1,50 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 	<title>PAYE CALCULATOR</title>
+	<style>
+		input:focus {
+   		outline:none;
+	}
+	</style>
 </head>
 <body>
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12 col-md-6 col-lg-4">
 		
-		
 			<?php 
+			 $gross = NULL;
+			 $monthlygross = NULL;
+			 $relief  = NULL;
+			 $reliefallowance = NULL;
+			 $pension = NULL;
+			 $non_taxable = NULL;
+			 $taxable_income = NULL;
+			 $monthlytaxable = NULL;
+			 $monthlypension = NULL;
+			 $taxpayable = NULL;
+			 $monthlytax = NULL;
+			$nettakehome = NULL;
+			$monthlytakehome = NULL;
+			$pensioncontribution = NULL;
+			$monthlytax = NULL;
+			$nettakehome = NULL;
+			$monthlytakehome = NULL;
+			$pensioncontribution = NULL;
+			$monthlypensioncontribution= NULL;
+			$totalbenefit= NULL;
+			$monthlytotalbenefit= NULL;
+			$companyexpense = NULL; 
+			$monthlycompanyexpense = NULL;
+			$monthlypensioncontribution= NULL;
+			$totalbenefit= NULL;
+			$monthlytotalbenefit= NULL;
+			$companyexpense = NULL; 
+			$monthlycompanyexpense = NULL;
+
+
+
  if (isset($_POST['submit']))
 		 { 
 		 $gross = $_POST['Gross'];
@@ -99,7 +133,7 @@
  ?> 
  <form action="cal.php" method="POST">
 			<div class="table-responsive">
-  		 <table style="width:50%" border="1">
+  		 <table style="width:80%" border="1">
   <caption>The PAYE Calculator</caption>  			
 
 			<thead>
@@ -155,8 +189,8 @@
 			</tr>
 			<tr>
 				<td>Other Employee benefits	</td>
-				<td><input type="varchar" class="form-control" style="border:none;  width: 98%" value="-" disabled></td>
-				<td><input type="varchar" class="form-control" style="border:none;  width: 98%" value="-" disabled></td>
+				<td><input type="varchar" class="form-control" style="border:none;  width: 98%" value="-" ></td>
+				<td><input type="varchar" class="form-control" style="border:none;  width: 98%" value="-" ></td>
 				<td>Enter Healthcare and other benefits as determined by the company (0 if not entered) </td>
 			</tr>
 			<tr>
@@ -189,5 +223,3 @@
 
 </body>
 </html>
-
- 
