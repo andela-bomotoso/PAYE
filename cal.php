@@ -2,10 +2,12 @@
 <html>
 <head>
 	<title>PAYE CALCULATOR</title>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<style>
 		input:focus {
    		outline:none;
 	}
+	
 	</style>
 </head>
 <body>
@@ -33,6 +35,8 @@
 			$monthlytakehome = NULL;
 			$pensioncontribution = NULL;
 			$monthlypensioncontribution= NULL;
+			$otheremployeebenefit = NULL;
+			$monthlyotherbenefit = NULL;
 			$totalbenefit= NULL;
 			$monthlytotalbenefit= NULL;
 			$companyexpense = NULL; 
@@ -47,7 +51,8 @@
 
  if (isset($_POST['submit']))
 		 { 
-		 $gross = $_POST['Gross'];
+		 $gross = str_replace(",", "", $_POST['Gross']);
+		 $otheremployeebenefit = $_POST['OtherEmployeeBenefits'];
 		 $monthlygross = $gross/12;
 		 $relief = 0.2*$gross;
 		 $reliefallowance = $relief + 200000;
@@ -56,6 +61,7 @@
 		 $taxable_income = $gross - $non_taxable;
 		 $monthlytaxable=$taxable_income/12;
 		 $monthlypension=$pension/12;
+		 $monthlyotherbenefit = $otheremployeebenefit/12;
 		
 		 function computeTaxPayable($taxable_income)	{
 		 	$taxpayable = 0;
@@ -125,15 +131,15 @@
 		$monthlytakehome = $nettakehome / 12;
 		$pensioncontribution = $gross*0.1;
 		$monthlypensioncontribution= $pensioncontribution/12;
-		$totalbenefit=$pensioncontribution + $nettakehome + $pension;
+		$totalbenefit=$pensioncontribution + $nettakehome + $pension + $otheremployeebenefit;
 		$monthlytotalbenefit= $totalbenefit/12;
 		$companyexpense = $totalbenefit + $taxpayable; 
 		$monthlycompanyexpense = $companyexpense/12;
  }
  ?> 
  <form action="cal.php" method="POST">
-			<div class="table-responsive">
-  		 <table style="width:80%" border="1">
+		<div style="width:80%">
+  		 <table  border="1">
   <caption>The PAYE Calculator</caption>  			
 
 			<thead>
@@ -179,7 +185,7 @@
 				<td>Amount on cheque or credited to bank</td>
 			</tr>
 			<tr>
-				<td style="border:none" align="center" valign="middle" colspan="4">Additional Company Expenses:	</td>
+				<th style="border:none" align="center" valign="middle" colspan="4">Additional Company Expenses:	</th>
 			</tr>
 			<tr>
 				<td>Employer Pension Contribution </td>
@@ -189,8 +195,8 @@
 			</tr>
 			<tr>
 				<td>Other Employee benefits	</td>
-				<td><input type="varchar" class="form-control" style="border:none;  width: 98%" value="-" ></td>
-				<td><input type="varchar" class="form-control" style="border:none;  width: 98%" value="-" ></td>
+				<td><input type="varchar" class="form-control" style="border:none;  width: 98%" name="OtherEmployeeBenefits" value="<?php echo number_format(floatval("$otheremployeebenefit"),2,".",",");?>"></td>
+				<td><input type="varchar" class="form-control" style="border:none;  width: 98%" value="<?php echo number_format(floatval("$monthlyotherbenefit"),2,".",",");?>" ></td>
 				<td>Enter Healthcare and other benefits as determined by the company (0 if not entered) </td>
 			</tr>
 			<tr>
@@ -206,16 +212,15 @@
 				<td><input type="varchar" class="form-control" style="border:none;  width: 98%" value="<?php echo number_format (floatval("$monthlycompanyexpense"),2,".",",");?>" disabled></td>
 				<td> </td>
 			</tr>
-			<tr>
-			<td style="border:none" align="center" valign="middle" colspan="4">
-			 <button type="submit"  name="submit" class="btn btn-default"  align = "center" style="background-color: #f44336; color: white;  padding: 14px 25px; text-align: center; text-decoration: none; display: inline-block;">Analyze  Payroll</button>
-			 </td>
-			 </tr>
+			
 			 </tbody>
 			 </table>
+			 <div style="text-align:center;">
+			  <button  class="w3-button w3-green w3-round-large w3-hover-teal" style="margin-top:20px" type="submit"  name="submit" >Analyze  Payroll</button>
 			 </div>
+			 </div>
+
 			</form>
-			
 	
 		</div>
 </div>
