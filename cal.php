@@ -217,6 +217,7 @@
 			 </table>
 			 <div style="text-align:center;">
 			  <button  class="w3-button w3-green w3-round-large w3-hover-teal" style="margin-top:20px" type="submit"  name="submit" >Analyze  Payroll</button>
+			  <button  class="w3-button w3-green w3-round-large w3-hover-teal" style="margin-top:20px" type="submit"  name="reset" >Reset</button>
 			 </div>
 			 </div>
 
